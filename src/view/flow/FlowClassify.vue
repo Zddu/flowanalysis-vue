@@ -6,8 +6,7 @@
                     <el-button type="success" size="small">选择网卡</el-button>
                     <el-button @click="startCap" type="primary" size="small" :disabled="startCapture">开始捕获</el-button>
                     <el-button @click="stopCap" type="danger" size="small" :disabled="stopCapture">停止捕获</el-button>
-                    <el-button @click="startAnalysis" type="primary" size="small" :disabled="startAna">开始流量分析
-                    </el-button>
+                    <el-button @click="startAnalysis" type="primary" size="small" :disabled="startAna">开始流量分析</el-button>
                 </div>
             </el-col>
         </el-row>
@@ -67,13 +66,20 @@
             choice(name) {
                 this.choiceName = name;
                 this.color1 = ' color:#409eff;font-size:12px';
-                this.getRequest("/flow/choiceif?ifname=" + name);
+                this.getRequest("/flow/choiceif?ifname=" + name).then(res=>{
+                    this.startCapture=false;
+                });
             },
             startCap() {
-
+                this.getRequest("/flow/startcap").then(res=>{
+                });
+                this.stopCapture = false;
             },
             stopCap() {
-
+                this.getRequest("/flow/stopcap").then(res=>{
+                    this.stopCapture=true;
+                    this.startAna=false;
+                })
             },
             startAnalysis() {
 
@@ -108,8 +114,7 @@
     .left1 li {
         width: 100%;
         height: 36px;
-        line-height: 36px;
-        font-size: 16px;
+        margin-top: 10px;
     }
 
     .left1 li:hover {
