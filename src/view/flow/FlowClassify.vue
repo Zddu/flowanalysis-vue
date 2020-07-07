@@ -101,7 +101,7 @@
                             </el-button>
                         </el-popover>
                         <el-button @click="stopCap" type="danger" size="small" :disabled="stopCapture">停止捕获</el-button>
-                        <el-button @click="startAnalysis" type="success" size="small" :disabled="!startAna">开始流量分析
+                        <el-button @click="startAnalysis" type="success" size="small" :disabled="startAna">开始流量分析
                         </el-button>
                     </div>
                     <div>
