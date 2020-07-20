@@ -18,8 +18,8 @@
                     </el-upload>
                     <div class="in_flex">
                         <div>
-                            <el-button @click="startClassify" style="margin-right: 10px;" size="small" type="success">
-                                开始分类
+                            <el-button :disabled="processing"  @click="startClassify" style="margin-right: 10px;" size="small" type="success">
+                                {{startext}}
                             </el-button>
                         </div>
                         <div>
@@ -57,9 +57,9 @@
                     <el-button type="success" :disabled="graphStyle" @click="pieGraph" plain size="small">饼状图</el-button>
                     <el-button type="success" :disabled="graphStyle" @click="formGraph" plain size="small">表格</el-button>
                 </div>
-                <div class="right_file">
+                <div  class="right_file">
                     <span v-show="nodata" style="font-size: 60px;color: #8ea09f;">暂无分类结果</span>
-
+                    <span v-show="classifing" style="font-size: 60px;color: #8ea09f;">正在分类中，请稍等...</span>
                     <PieFlowAnalysis v-if="ifshow" :data="data" id="pie"/>
                     <BarFlowAnalysis v-if="isbar" :data="data" id="bar"/>
                     <LineFlowAnalysis v-if="isline" :data="data" id="line"/>
@@ -82,6 +82,10 @@
         components: {FormFlowAnalysis, LineFlowAnalysis, BarFlowAnalysis, PieFlowAnalysis},
         data() {
             return {
+                classifing:false,
+                startext:'开始分类',
+                processing:false,
+                loading:true,
                 nodata: true,
                 isline: false,
                 isbar: false,
@@ -120,7 +124,6 @@
                 this.isbar = false;
                 this.isline = true;
                 this.getRequest("/flow/bardata").then(res=>{
-                    console.log(res);
                     this.data = res;
                 })
             },
@@ -138,14 +141,20 @@
             },
             getClssifyResult() {
                 this.getRequest("/flow/classifyresult").then(res => {
+                    this.processing=false;
+                    this.startext = '开始分类';
                     this.data = res;
                 })
             },
             startClassify() {
+                this.processing=true;
+                this.startext = '正在分类中...';
+                this.nodata = false;
+                this.classifing = true;
                 this.getRequest("/flow/startclassify").then(res => {
                     if (res) {
                         this.getClssifyResult();
-                        this.nodata = false;
+                        this.classifing=false;
                         this.ifshow = true;
                         this.graphStyle = false;
                     }
