@@ -20,8 +20,8 @@
                         </template>
                         <el-menu-item index="/dataProcessing">数据加工</el-menu-item>
                         <el-menu-item index="/modelTrain">模型训练</el-menu-item>
-                        <el-menu-item index="/fileClassify">文件分类</el-menu-item>
-                        <el-menu-item index="/flowClassify">自动分类</el-menu-item>
+                        <el-menu-item index="/fileClassify">文件识别</el-menu-item>
+                        <el-menu-item index="/flowClassify">自动识别</el-menu-item>
                     </el-submenu>
                 </el-menu>
             </el-aside>
