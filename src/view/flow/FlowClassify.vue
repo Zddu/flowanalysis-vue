@@ -134,6 +134,7 @@
             <el-col :span="16">
                 <div class="right">
                     <span v-show="nodatastyle" style="font-size: 60px;color: #8ea09f;">暂无分类结果</span>
+                    <span v-show="classifing" style="font-size: 60px;color: #8ea09f;">正在分类中，请稍等...</span>
                     <PieFlowAnalysis v-if="ifshowstyle" :data="data" id="pie"/>
                 </div>
             </el-col>
@@ -149,6 +150,7 @@
         components: {PieFlowAnalysis},
         data() {
             return {
+                classifing:false,
                 ifsuccess: true,
                 features: [],
                 ulStyle1: 'left1',
@@ -196,6 +198,7 @@
                 });
             },
             startCap() {
+                this.nodatastyle = true;
                 this.getRequest("/flow/startcap").then(res => {
                 });
                 this.stopCapture = false;
@@ -216,10 +219,12 @@
                 })
             },
             startAnalysis() {
+                this.classifing = true;
                 this.getRequest("/flow/startanalysis").then(res => {
                     if (res) {
                         this.getClssifyResult();
                         this.nodatastyle = false;
+                        this.classifing = false;
                         this.ifshowstyle = true;
                     }
                 })
