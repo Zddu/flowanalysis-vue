@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-header class="homeContainer">
-            <span class="title">流量分析</span>
+            <span class="title">流量识别</span>
 
         </el-header>
         <el-container>
@@ -16,10 +16,10 @@
                     <el-submenu index="8">
                         <template slot="title">
                             <i class="el-icon-data-analysis"></i>
-                            <span>流量分析</span>
+                            <span>流量识别</span>
                         </template>
-                        <el-menu-item index="/dataProcessing">数据加工</el-menu-item>
-                        <el-menu-item index="/modelTrain">模型训练</el-menu-item>
+                        <el-menu-item index="/dataProcessing">文件加工</el-menu-item>
+<!--                        <el-menu-item index="/modelTrain">模型训练</el-menu-item>-->
                         <el-menu-item index="/fileClassify">文件识别</el-menu-item>
                         <el-menu-item index="/flowClassify">自动识别</el-menu-item>
                     </el-submenu>

@@ -55,7 +55,7 @@
                     <el-button type="success" :disabled="graphStyle" @click="barGraph" plain size="small">柱状图</el-button>
                     <el-button type="success" :disabled="graphStyle" @click="lineGraph" plain size="small">折线图</el-button>
                     <el-button type="success" :disabled="graphStyle" @click="pieGraph" plain size="small">饼状图</el-button>
-                    <el-button type="success" :disabled="graphStyle" @click="formGraph" plain size="small">表格</el-button>
+<!--                    <el-button type="success" :disabled="graphStyle" @click="formGraph" plain size="small">表格</el-button>-->
                 </div>
                 <div  class="right_file">
                     <span v-show="nodata" style="font-size: 60px;color: #8ea09f;">暂无分类结果</span>
@@ -63,7 +63,7 @@
                     <PieFlowAnalysis v-if="ifshow" :data="data" id="pie"/>
                     <BarFlowAnalysis v-if="isbar" :data="data" id="bar"/>
                     <LineFlowAnalysis v-if="isline" :data="data" id="line"/>
-                    <FormFlowAnalysis v-show="isform" />
+<!--                    <FormFlowAnalysis v-show="isform" />-->
                 </div>
             </el-col>
         </el-row>
@@ -147,6 +147,10 @@
                 })
             },
             startClassify() {
+                this.ifshow = false;
+                this.isbar = false;
+                this.isline = false;
+
                 this.processing=true;
                 this.startext = '正在分类中...';
                 this.nodata = false;
