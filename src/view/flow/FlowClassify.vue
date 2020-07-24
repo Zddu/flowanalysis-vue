@@ -220,10 +220,10 @@
             },
             startAnalysis() {
                 this.classifing = true;
+                this.nodatastyle = false;
                 this.getRequest("/flow/startanalysis").then(res => {
                     if (res) {
                         this.getClssifyResult();
-                        this.nodatastyle = false;
                         this.classifing = false;
                         this.ifshowstyle = true;
                     }
